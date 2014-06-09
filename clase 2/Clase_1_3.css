@@ -1,0 +1,26 @@
+%yes-extend {
+	background: url(http://www.placekitten.com/200/200) no-repeat;
+}
+
+%no-extend {
+	background: no-kittens;
+}
+
+@mixin my-mixin($val1, $val2:1em, $val3:false){
+	color: $val1;
+	font-size: $val2;
+	@if $val3 { @extend %yes-extend; } 
+	@else { @extend %no-extend; }
+	@content;
+}
+
+.my-class {
+	@include my-mixin(green);
+}
+
+.my-other-class {
+	@include my-mixin(blue, $val3:true){
+		box-shadow: 2px 2px 2px black;
+		border-botton: 1px solid black;
+	}
+}
